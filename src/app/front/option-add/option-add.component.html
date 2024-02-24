@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f0f0f0; }
+    .main-block { display: flex; justify-content: center; align-items: center; height: 100vh; perspective: 1000px; }
+    .form-block { background: #fff; padding: 30px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s; }
+    .form-block:hover { transform: translateZ(-50px); }
+    .form-block i, h1, p { color: #26a9e0; }
+    .form-block i { font-size: 50px; }
+    h1 { margin: 10px 0; font-size: 25px; }
+    p { font-size: 15px; }
+    .btn-primary { padding: 10px 5px; margin-top: 20px; border-radius: 5px; border: none; background: #26a9e0; text-decoration: none; font-size: 15px; font-weight: 400; color: #fff; }
+    .btn-primary:hover { background: #85d6de; }
+    .form-group { display: flex; flex-direction: column; margin-bottom: 20px; }
+    .form-group label { font-weight: bold; margin-bottom: 5px; }
+    .form-group input { padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 10px; }
+    @media (min-width: 568px) {
+      .main-block { flex-direction: row; height: calc(100% - 50px); }
+      .form-block { flex: 1; height: auto; 
+        .error-message { color: red; margin-top: 5px; font-size: 16px;}
+    }
+  </style>
+</head>
+<body>
+<div class="main-block">
+    <div class="form-block">
+      <i class="fas fa-pencil-alt"></i>
+      <h1>Ajouter un Option</h1>
+      <form #addForm="ngForm" (ngSubmit)="addOption()">
+        <div class="form-group">
+          <label for="nameOption">Nom de l'option</label>
+          <input type="text" class="form-control" id="nameOption" name="nameOption" [(ngModel)]="option.nameOption" required #nameOption="ngModel">
+          <div *ngIf="nameOption.invalid && nameOption.touched" class="error-message">
+            Le nom du Option est requis.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="mail">Mail</label>
+          <input type="email" class="form-control" id="mail" name="mail" [(ngModel)]="option.mailOption" required #mail="ngModel">
+          <div *ngIf="mail.errors?.['required'] && mail.touched" class="error-message">
+            L'email est requis.
+          </div>
+          <div *ngIf="mail.errors?.['email'] && mail.touched" class="error-message">
+            Veuillez entrer une adresse email valide.
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!addForm.valid">Ajouter l'option</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

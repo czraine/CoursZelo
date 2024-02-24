@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    .container { background: #fff; padding: 30px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s; }
+    .container:hover { transform: translateZ(-50px); }
+    .container { display: flex; flex-direction: column; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Cards -->
+    <div class="row">
+      <div *ngFor="let m of list" class="col-md-4">
+        <div class="card shadow animate__animated animate__fadeInUp">
+          <div class="card-body">
+            <h5 class="card-title">{{ m.nameOption}} </h5>
+            <p class="card-text">Mail: {{ m.mailOption }}</p>
+            <button type="button" class="btn btn-primary btn-shadow" (click)="openModal(m)">Show Details</button>
+            <button type="button" class="btn btn-secondary btn-shadow" (click)="openModal(m, 'edit')">Edit</button>
+            <button type="button" class="btn btn-danger btn-shadow btn-spacing" (click)="confirmDelete(m.idOption)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal -->
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': modalDisplay ? 'block' : 'none'}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ modalMode === 'edit' ? 'Edit Option' : 'Option Details' }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Name: {{ currentOption?.nameOption }}</p>
+          <p>mailOption: {{ currentOption?.mailOption }}</p>
+          <!-- Add form fields here for editing if modalMode is 'edit' -->
+          <div *ngIf="modalMode === 'edit'">
+            <!-- Example for editing nameOption -->
+            <div class="form-group">
+              <label for="nameOption">Option Name</label>
+              <input type="text" class="form-control" id="nameOption" [(ngModel)]="currentOption.nameOption">
+              <label for="mailOption">mailOption</label>
+              <input type="text" class="form-control" id="mailOption" [(ngModel)]="currentOption.mailOption">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+          <button type="button" class="btn btn-primary" *ngIf="modalMode === 'edit'" (click)="saveChanges()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</body>
+</html>
