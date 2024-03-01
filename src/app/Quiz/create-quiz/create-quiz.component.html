@@ -1,0 +1,102 @@
+<div class="quiz-management-container">
+    <h1>Create or Edit Quiz</h1>
+    <form #quizForm="ngForm" (ngSubmit)="saveQuiz()">
+  
+      <!-- Quiz Title -->
+      <div class="form-group">
+        <label for="title">Quiz Title:</label>
+        <input type="text" id="title" class="form-control" [(ngModel)]="quiz.title" name="title" required>
+      </div>
+  
+      <!-- Quiz Questions -->
+      <div *ngFor="let question of quiz.questions; let qIndex = index" class="question-container">
+        <div class="form-group">
+          <label for="questionText-{{qIndex}}">Question Text:</label>
+          <input type="text" id="questionText-{{qIndex}}" class="form-control" [(ngModel)]="question.text" name="questionText-{{qIndex}}" placeholder="Enter the question text" required>
+        </div>
+  
+        <!-- Options -->
+        <div class="form-group">
+          <label>Options:</label>
+          <div *ngFor="let option of question.options; let oIndex = index">
+            <div class="option-group">
+              <input type="radio" [(ngModel)]="question.correctAnswerIndex" [value]="oIndex" [name]="'correctAnswer-' + qIndex" id="correctAnswer-{{qIndex}}-{{oIndex}}">
+              <label for="correctAnswer-{{qIndex}}-{{oIndex}}">Option {{ oIndex + 1 }}</label>
+              <input type="text" class="form-control" [(ngModel)]="question.options[oIndex]" [name]="'optionText-' + qIndex + '-' + oIndex" placeholder="Enter option text" required>
+            </div>
+          </div>
+          <!-- Add Option Button -->
+          <button type="button" class="btn btn-secondary" (click)="addOption(qIndex)">Add Option</button>
+        </div>
+      </div>
+  
+      <!-- Add Question Button -->
+      <button type="button" class="btn btn-secondary" (click)="addQuestion()">Add Question</button>
+  
+      <!-- Other Quiz Properties -->
+      <!-- Quiz Creator -->
+      <div class="form-group">
+        <label for="creator">Creator:</label>
+        <input type="text" id="creator" class="form-control" [(ngModel)]="quiz.creator" name="creator" required>
+      </div>
+  
+      <!-- Quiz Status -->
+      <div class="form-group">
+        <label for="status">Status:</label>
+        <select id="status" class="form-control" [(ngModel)]="quiz.status" name="status" required>
+          <option value="Draft">Draft</option>
+          <option value="Published">Published</option>
+        </select>
+      </div>
+  
+      <!-- Max Attempts -->
+      <div class="form-group">
+        <label for="maxAttempts">Max Attempts:</label>
+        <input type="number" id="maxAttempts" class="form-control" [(ngModel)]="quiz.maxAttempts" name="maxAttempts" required>
+      </div>
+  
+      <!-- Show Answers Checkbox -->
+      <div class="form-check">
+        <label for="showAnswers" class="form-check-label">
+          <input type="checkbox" id="showAnswers" class="form-check-input" [(ngModel)]="quiz.showAnswers" name="showAnswers">
+          Show Answers
+        </label>
+      </div>
+  
+      <!-- Show Score Checkbox -->
+      <div class="form-check">
+        <label for="showScore" class="form-check-label">
+          <input type="checkbox" id="showScore" class="form-check-input" [(ngModel)]="quiz.showScore" name="showScore">
+          Show Score
+        </label>
+      </div>
+  
+      <!-- Pass Mark -->
+      <div class="form-group">
+        <label for="passMark">Pass Mark:</label>
+        <input type="number" id="passMark" class="form-control" [(ngModel)]="quiz.passMark" name="passMark" required>
+      </div>
+  
+      <!-- Schedule Date -->
+      <div class="form-group">
+        <label for="scheduleDate">Schedule Date:</label>
+        <input type="datetime-local" id="scheduleDate" class="form-control" [(ngModel)]="quiz.scheduleDate" name="scheduleDate">
+      </div>
+  
+      <!-- Duration in Seconds -->
+      <div class="form-group">
+        <label for="durationInSeconds">Duration (in seconds):</label>
+        <input type="number" id="durationInSeconds" class="form-control" [(ngModel)]="quiz.durationInSeconds" name="durationInSeconds">
+      </div>
+  
+      <!-- Randomize Questions Checkbox -->
+      <div class="form-check">
+        <label for="randomizeQuestions" class="form-check-label">
+          <input type="checkbox" id="randomizeQuestions" class="form-check-input" [(ngModel)]="quiz.randomizeQuestions" name="randomizeQuestions">
+          Randomize Questions
+        </label>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Save Quiz</button>
+    </form>
+</div>

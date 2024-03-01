@@ -1,0 +1,44 @@
+<div *ngIf="quiz">
+    <h1>{{ quiz.title }}</h1>
+    <form (ngSubmit)="submitAttempt()">
+      <div *ngFor="let question of quiz.questions; index as qIndex">
+        <p>{{ question.text }}</p>
+        <ul>
+          <li *ngFor="let option of question.options; index as oIndex">
+            <label for="option">option:</label>
+            <input  type="radio" id="option"
+              
+              [id]="'option-' + qIndex + '-' + oIndex" 
+              [name]="'question-' + qIndex" 
+              (change)="onAnswer(question.id, oIndex)"
+            />
+            <label [for]="'option-' + qIndex + '-' + oIndex">{{ option }}</label>
+          </li>
+        </ul>
+      </div>
+      <div class="form-group">
+        <label for="studentName">Student Name:</label>
+        <input 
+          type="text" 
+          id="studentName" 
+          [(ngModel)]="studentName" 
+          name="studentName" 
+          placeholder="Enter your name" 
+          title="Enter your full name here"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="feedback">Feedback:</label>
+        <textarea 
+          id="feedback" 
+          [(ngModel)]="feedback" 
+          name="feedback" 
+          placeholder="Any feedback?" 
+          title="Leave your feedback about the quiz here"
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit Attempt</button>
+    </form>
+  </div>
+  

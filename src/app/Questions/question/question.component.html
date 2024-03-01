@@ -1,0 +1,20 @@
+  
+  <div class="question-container">
+    <h4>{{ question.text }}</h4>
+    <div *ngFor="let option of question.options; index as idx">
+      <!-- Utilisez un identifiant unique pour chaque bouton radio en combinant l'ID de la question et l'index de l'option -->
+      <label for="option">option:</label>
+        <input type="radio" id="option"
+        [id]="'option-' + question.idQuestion + '-' + idx" 
+        [value]="idx"
+        [(ngModel)]="question.selectedOptionIndex" 
+        (change)="onOptionSelected(idx)"
+        [name]="'question-' + question.idQuestion"
+        [attr.title]="'Select ' + option"
+      />
+      <!-- Associez le label au bouton radio correspondant via l'attribut for -->
+      <label [for]="'option-' + question.idQuestion + '-' + idx">{{ option }}</label>
+    </div>
+    <!-- Ajouter ici un élément de feedback si nécessaire -->
+  </div>
+  

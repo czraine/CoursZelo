@@ -1,0 +1,18 @@
+.question-container {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  
+  .question-container h4 {
+    margin-top: 0;
+  }
+  
+  .question-container label {
+    margin-left: 5px;
+  }
+  
+  .question-container input[type="radio"] {
+    margin-top: -2px;
+  }
+  

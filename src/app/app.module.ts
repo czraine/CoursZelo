@@ -24,6 +24,11 @@ import { ModuleComponent } from './front/module/module.component';
 import { ModuleListComponent } from './front/module-list/module-list.component';
 import { OptionAddComponent } from './front/option-add/option-add.component';
 import { OptionListComponent } from './front/option-list/option-list.component';
+import { QuestionComponent } from './Questions/question/question.component';
+import { QuizListComponent } from './QuizList/quiz-list/quiz-list.component';
+import { QuizTakeComponent } from './QuizTake/quiz-take/quiz-take.component';
+import { CreateQuizComponent } from './Quiz/create-quiz/create-quiz.component';
+import { AttemptComponent } from './Attempt/attempts/attempts.component';
 //import { FileUploadModule } from 'primeng/fileupload';
 const routes: Routes = [
   //{path:'', redirectTo:'CourselComponent', pathMatch:'full'},
@@ -41,7 +46,13 @@ const routes: Routes = [
   {path:"Module", component:ModuleComponent},
   {path:"moduleList", component:ModuleListComponent},
   {path:"optionAdd", component:OptionAddComponent},
-  {path:"optionList", component:OptionListComponent}
+  {path:"optionList", component:OptionListComponent},
+  {path:"QUIZAdd",component:CreateQuizComponent},
+  {path:"quiz-list",component:QuizListComponent},
+  {path:"Question",component:QuestionComponent},
+  //{path:"Attemp",component:AttemptsComponent}
+  { path: 'quiz/:id', component: AttemptComponent },
+  {path:"QuizAttemp", component: AttemptComponent}
 
     
   
@@ -52,8 +63,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [AppComponent, NavComponent, FooterComponent, CourselComponent,
     CoursesCategoriesComponent,CoursesComponent,TeamComponent,TestComponent,
-    AboutComponent,CoursesManagerComponent,
-    ContactComponent,NotFoundComponent,UniversityComponent,ModuleComponent,ModuleListComponent,OptionAddComponent,OptionListComponent],
+    AboutComponent,CoursesManagerComponent,ContactComponent,
+    ContactComponent,NotFoundComponent,UniversityComponent,ModuleComponent,
+    ModuleListComponent,OptionAddComponent,OptionListComponent,
+    QuestionComponent,QuizListComponent,QuizTakeComponent,CreateQuizComponent,AttemptComponent],
   imports: [BrowserModule,RouterModule.forRoot(routes),HttpClientModule,FormsModule,ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
